@@ -56,9 +56,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } else {
             ProgressDialog progressDialog = new ProgressDialog(this);
             progressDialog.setMessage("Logged in" + ParseUser.getCurrentUser());
+
             switch (v.getId()) {
-
-
                 case R.id.btnLoginLoginActivity:
                     ParseUser.logInInBackground(edtLoginEmail.getText().toString(), edtPassword.getText().toString(), new LogInCallback() {
                         @Override
