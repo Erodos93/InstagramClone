@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         edtPassword.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if(keyCode==KeyEvent.KEYCODE_ENTER && event.getAction()==KeyEvent.ACTION_DOWN){
+                if (keyCode == KeyEvent.KEYCODE_ENTER && event.getAction() == KeyEvent.ACTION_DOWN) {
                     onClick(btnLogin);
                 }
                 return false;
@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             FancyToast.makeText(LoginActivity.this, "User name,Password,Email is needed", Toast.LENGTH_LONG, FancyToast.INFO, true).show();
 
         } else {
-            ProgressDialog progressDialog=new ProgressDialog(this);
-            progressDialog.setMessage("Logged in"+ParseUser.getCurrentUser());
+            ProgressDialog progressDialog = new ProgressDialog(this);
+            progressDialog.setMessage("Logged in" + ParseUser.getCurrentUser());
             switch (v.getId()) {
 
 
