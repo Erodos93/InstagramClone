@@ -43,8 +43,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
         if (ParseUser.getCurrentUser() != null) {
-//            ParseUser.getCurrentUser().logOut();
-            translationToSocialMediaActivity();
+            ParseUser.getCurrentUser();
+            ParseUser.logOut();
+//            translationToSocialMediaActivity();
         }
 
     }
@@ -54,14 +55,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onClick(View v) {
 
         if (edtLoginEmail.getText().equals("") || edtPassword.getText().equals("")) {
-            FancyToast.makeText(LoginActivity.this, "User name,Password,Email is needed", Toast.LENGTH_LONG, FancyToast.INFO, true).show();
+            FancyToast.makeText(LoginActivity.this, "Password and Email is needed", Toast.LENGTH_LONG, FancyToast.INFO, true).show();
 
         } else {
 
 
             switch (v.getId()) {
                 case R.id.btnLoginLoginActivity:
-                    ProgressDialog progressDialog = new ProgressDialog(this);
+                    final ProgressDialog progressDialog = new ProgressDialog(this);
                     progressDialog.setMessage("Logged in");
                     progressDialog.show();
                     ParseUser.logInInBackground(edtLoginEmail.getText().toString(), edtPassword.getText().toString(), new LogInCallback() {
@@ -75,9 +76,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 FancyToast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT, FancyToast.ERROR, true).show();
 
                             }
+                            progressDialog.dismiss();
                         }
                     });
-                    progressDialog.dismiss();
+
                     break;
                 case R.id.btnSignUpLoginActivity:
                     finish();

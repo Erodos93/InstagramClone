@@ -41,6 +41,10 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         btnSignUp = (Button) findViewById(R.id.btnSignUpLoginActivity);
         btnLogin.setOnClickListener(SignUp.this);
         btnSignUp.setOnClickListener(SignUp.this);
+        if(ParseUser.getCurrentUser() != null){
+            ParseUser.getCurrentUser();
+            ParseUser.logOut();
+        }
         edtPassword.setOnKeyListener(new View.OnKeyListener() {
             @Override
             public boolean onKey(View view, int keyCode, KeyEvent event) {
@@ -64,6 +68,9 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                 signUser.setUsername(edtUserName.getText().toString());
                 signUser.setPassword(edtPassword.getText().toString());
 
+                final ProgressDialog progressDialog = new ProgressDialog(SignUp.this);
+                progressDialog.setMessage("Signing up" + edtUserName.getText().toString());
+                progressDialog.show();
                 if (edtUserName.getText().equals("") ||
                         edtPassword.getText().equals("") ||
                         edtEmail.getText().equals("")) {
@@ -73,19 +80,17 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
 
                 } else {
-                    final ProgressDialog progressDialog = new ProgressDialog(SignUp.this);
-                    progressDialog.setMessage("Signing up" + edtUserName.getText().toString());
-                    progressDialog.show();
-                    translationToSocialMediaActivity();
                     signUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
                             if (e == null) {
                                 FancyToast.makeText(SignUp.this, signUser.getUsername() + " is sign success.", Toast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                                translationToSocialMediaActivity();
                             } else {
-                                FancyToast.makeText(SignUp.this, signUser.get("name") + " is sign with error " + e.getMessage(), Toast.LENGTH_SHORT, FancyToast.ERROR, true).show();
+                                FancyToast.makeText(SignUp.this, " There was an error " + e.getMessage(), Toast.LENGTH_SHORT, FancyToast.ERROR, true).show();
 
                             }
+
                             progressDialog.dismiss();
                         }
                     });
