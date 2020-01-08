@@ -76,7 +76,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
                     final ProgressDialog progressDialog = new ProgressDialog(SignUp.this);
                     progressDialog.setMessage("Signing up" + edtUserName.getText().toString());
                     progressDialog.show();
-
+                    translationToSocialMediaActivity();
                     signUser.signUpInBackground(new SignUpCallback() {
                         @Override
                         public void done(ParseException e) {
@@ -99,7 +99,17 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
 
     }
     public void rootLayoutTapped(View view){
-        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        try {
+            InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);
+        }catch (Exception e){
+            e.getStackTrace();
+        }
+
+    }
+    public void translationToSocialMediaActivity(){
+
+        Intent intent=new Intent(SignUp.this,SocialMediaActivity.class);
+        startActivity(intent);
     }
 }
