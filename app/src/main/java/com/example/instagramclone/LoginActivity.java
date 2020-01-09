@@ -43,9 +43,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         });
         if (ParseUser.getCurrentUser() != null) {
-            ParseUser.getCurrentUser();
-            ParseUser.logOut();
-//            translationToSocialMediaActivity();
+
+            translationToSocialMediaActivity();
         }
 
     }

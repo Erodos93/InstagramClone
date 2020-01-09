@@ -42,8 +42,7 @@ public class SignUp extends AppCompatActivity implements View.OnClickListener {
         btnLogin.setOnClickListener(SignUp.this);
         btnSignUp.setOnClickListener(SignUp.this);
         if(ParseUser.getCurrentUser() != null){
-            ParseUser.getCurrentUser();
-            ParseUser.logOut();
+            translationToSocialMediaActivity();
         }
         edtPassword.setOnKeyListener(new View.OnKeyListener() {
             @Override
