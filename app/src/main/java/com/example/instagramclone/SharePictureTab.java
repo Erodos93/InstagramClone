@@ -99,10 +99,10 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
                         receivedImageBitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
                         byte[] bytes = byteArrayOutputStream.toByteArray();
-                        ParseFile parseFile = new ParseFile("pic.png",bytes);
+                        ParseFile parseFile = new ParseFile("pic.png", bytes);
                         ParseObject parseObject = new ParseObject("Photo");
-                        parseObject.put("picture",parseFile);
-                        parseObject.put("image_des",edtDescription.getText().toString());
+                        parseObject.put("picture", parseFile);
+                        parseObject.put("image_des", edtDescription.getText().toString());
                         parseObject.put("username", ParseUser.getCurrentUser().getUsername());
                         final ProgressDialog dialog = new ProgressDialog(getContext());
                         dialog.setMessage("Loading");
@@ -111,14 +111,14 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                         parseObject.saveInBackground(new SaveCallback() {
                             @Override
                             public void done(ParseException e) {
-                              if(e==null){
-                                  FancyToast.makeText(getContext(), "Done!!!", Toast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                                if (e == null) {
+                                    FancyToast.makeText(getContext(), "Done!!!", Toast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
 
-                              }else {
-                                  FancyToast.makeText(getContext(), "Something is wrong: "+ e.getMessage(), Toast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
+                                } else {
+                                    FancyToast.makeText(getContext(), "Something is wrong: " + e.getMessage(), Toast.LENGTH_SHORT, FancyToast.SUCCESS, true).show();
 
-                              }
-                              dialog.dismiss();
+                                }
+                                dialog.dismiss();
                             }
                         });
                     }
@@ -168,7 +168,7 @@ public class SharePictureTab extends Fragment implements View.OnClickListener {
                     String picturePath = cursor.getString(columnIndex);
                     cursor.close();
 
-                     receivedImageBitmap = BitmapFactory.decodeFile(picturePath);
+                    receivedImageBitmap = BitmapFactory.decodeFile(picturePath);
                     imgPhoto.setImageBitmap(receivedImageBitmap);
                 } catch (Exception e) {
                     e.getStackTrace();
